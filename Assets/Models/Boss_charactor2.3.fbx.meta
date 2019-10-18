@@ -1,71 +1,8 @@
 fileFormatVersion: 2
 guid: fae83d1ddba0a0a4a98628fbe6b83685
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Armature
-    100002: Body
-    100004: Body01
-    100006: Body02
-    100008: //RootNode
-    100010: Camera
-    100012: Face
-    100014: Head
-    100016: Head_end
-    100018: Hip_L
-    100020: Hip_R
-    100022: Leg_L.
-    100024: Leg_L._end
-    100026: Leg_R
-    100028: Leg_R_end
-    100030: Light
-    100032: LowerArm_L.
-    100034: LowerArm_L._end
-    100036: LowerArm_R
-    100038: LowerArm_R_end
-    100040: Shoulder_L
-    100042: Shoulder_R
-    100044: UpperArm_L
-    100046: UpperArm_R
-    400000: Armature
-    400002: Body
-    400004: Body01
-    400006: Body02
-    400008: //RootNode
-    400010: Camera
-    400012: Face
-    400014: Head
-    400016: Head_end
-    400018: Hip_L
-    400020: Hip_R
-    400022: Leg_L.
-    400024: Leg_L._end
-    400026: Leg_R
-    400028: Leg_R_end
-    400030: Light
-    400032: LowerArm_L.
-    400034: LowerArm_L._end
-    400036: LowerArm_R
-    400038: LowerArm_R_end
-    400040: Shoulder_L
-    400042: Shoulder_R
-    400044: UpperArm_L
-    400046: UpperArm_R
-    2000000: Camera
-    2100000: Material
-    2100002: Material.008
-    2100004: Material.003
-    2100006: Material.001
-    2100008: Material.002
-    2100010: Material.004
-    2100012: Material.005
-    4300000: Body
-    4300002: Face
-    9500000: //RootNode
-    10800000: Light
-    13700000: Body
-    13700002: Face
-    2186277476908879412: ImportLogs
+  serializedVersion: 26
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -101,6 +38,7 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -108,18 +46,19 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -128,10 +67,11 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -141,6 +81,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
