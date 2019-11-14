@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\BossBattleController.cs" />
     <Compile Include="Assets\Scripts\CallStage1Script.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\displaymanager.cs" />
     <Compile Include="Assets\Scripts\MovingBoProto.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\RetryScript.cs" />
