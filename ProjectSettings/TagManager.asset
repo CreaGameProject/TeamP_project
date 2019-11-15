@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Bo-
   - Can'tJump
+  - Boss
   layers:
   - Default
   - TransparentFX
