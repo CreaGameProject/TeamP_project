@@ -62,7 +62,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\DepthOfField.cs" />
     <Compile Include="Assets\Scripts\AudioController.cs" />
     <Compile Include="Assets\Scripts\BoAnimate.cs" />
     <Compile Include="Assets\Scripts\BoHit.cs" />
@@ -70,11 +69,13 @@
     <Compile Include="Assets\Scripts\BossBattleController.cs" />
     <Compile Include="Assets\Scripts\CallStage1Script.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\DepthOfField.cs" />
     <Compile Include="Assets\Scripts\displaymanager.cs" />
     <Compile Include="Assets\Scripts\MovingBoProto.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\RetryScript.cs" />
     <Compile Include="Assets\Scripts\ToTitleScript.cs" />
+    <Compile Include="Assets\Scripts\UIControler.cs" />
     <Compile Include="Assets\Scripts\Zako1.cs" />
     <Compile Include="Assets\Scripts\Zako2.cs" />
     <Reference Include="Unity.Timeline.Editor">
@@ -635,7 +636,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
