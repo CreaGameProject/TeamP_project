@@ -35,4 +35,10 @@ public class UIControler : MonoBehaviour
         dof.focusDistance.Override(4);
         PostProcessManager.instance.QuickVolume(postProcessGameObject.layer, 1, dof);
     }
+
+    public void EndGame()
+    {
+        UnityEditor.EditorApplication.isPlaying = false;
+		Application.Quit();
+    }
 }
