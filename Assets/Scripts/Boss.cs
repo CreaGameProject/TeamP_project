@@ -20,7 +20,7 @@ public class Boss : MonoBehaviour
             {
                 GoToGameClear();
             }
-            
+
             Debug.Log(collision.gameObject.name);
 
         }
