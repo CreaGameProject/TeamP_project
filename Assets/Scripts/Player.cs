@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.PostProcessing;
+
 
 public class Player : MonoBehaviour
 {
@@ -71,6 +73,12 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private AudioClip[] ACs;  //音声素材を格納する
+
+    public GameObject GameOverCanvas;
+
+    [SerializeField]
+    GameObject postProcessGameObject;
+
 
     // Start is called before the first frame update
     void Start()
@@ -271,7 +279,10 @@ public class Player : MonoBehaviour
             images[hp].SetActive(false);
             if(hp == 0)
             {
-                GoToGameOver();
+                //GoToGameOver();
+                GameOverCanvas.SetActive(true);
+                Invoke("FixDOF", 1f);
+
             }
             else
             {
@@ -297,8 +308,17 @@ public class Player : MonoBehaviour
         //eyes[3].SetActive(false);
     }
 
-    private void GoToGameOver()
+    //private void gotogameover()
+    //{
+    //    scenemanager.loadscene("gameoverscene");
+    //}
+
+    //ぼかす
+    void FixDOF()
     {
-        SceneManager.LoadScene("GameOverScene");
+        var dof = ScriptableObject.CreateInstance<DepthOfField>();
+        dof.focusDistance.Override(4);
+        PostProcessManager.instance.QuickVolume(postProcessGameObject.layer, 1, dof);
     }
+
 }
