@@ -65966,6 +65966,16 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 135ef1043826e714f90f3613866cb4f8,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 20eb7445e0e01ca4fb9c03a429e320fe, type: 2}
+    - target: {fileID: -6057140222963153312, guid: 135ef1043826e714f90f3613866cb4f8,
+        type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 135ef1043826e714f90f3613866cb4f8, type: 3}
 --- !u!1 &1803970884 stripped
@@ -65974,21 +65984,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1803970883}
   m_PrefabAsset: {fileID: 0}
---- !u!111 &1803970885
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1803970884}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!136 &1803970886
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -66031,6 +66026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe4855be1ab7614aad497eddbff0f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Bosshp: 5
 --- !u!1 &1805851675 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: eaf0bebf885c66445b707607102f9829,
