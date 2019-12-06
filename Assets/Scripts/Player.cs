@@ -137,115 +137,115 @@ public class Player : MonoBehaviour
                 StopCoroutine("Jump_Set");
                 freeze_move = false;
             }
-            bo_fake.transform.position = (bo_end_point + transform.position) / 2.0f;  
-            bo_fake.transform.LookAt(hand_object.transform.position);
+            bo_fake.transform.position = (bo_end_point + transform.position) / 2.0f;  //棒の見た目の位置を判定の位置にする  
+            bo_fake.transform.LookAt(hand_object.transform.position);  //棒の向きを手の方向に向ける
         }
 
-        if (!freeze_move && rb.velocity.z * forward < max_speed && !touching_wall)
+        if (!freeze_move && rb.velocity.z * forward < max_speed && !touching_wall)  //右に移動中の時
         {
-            rb.velocity += new Vector3(0, 0, input_x * speed * Time.deltaTime);
-            if(max_speed - (rb.velocity.z * forward) < 0.3f)
+            rb.velocity += new Vector3(0, 0, input_x * speed * Time.deltaTime);  //プレイヤーの速度を上げる
+            if(max_speed - (rb.velocity.z * forward) < 0.3f)  //プレイヤーの速度が最高速近くのとき、
             {
-                animator.SetInteger("state", 2);
+                animator.SetInteger("state", 2);  //アニメーションを走るモーションにする
             }
         }
         else
         {
-            if(max_speed > rb.velocity.z * forward)
+            if(max_speed > rb.velocity.z * forward)  //左に移動中、プレイヤーの速度が最高速より小さいとき
             {
-                rb.velocity += new Vector3 (0, 0, speed * Time.deltaTime * forward);
+                rb.velocity += new Vector3 (0, 0, speed * Time.deltaTime * forward);  //プレイヤーの速度を上げる
                 
             }
             else
             {
-                animator.SetInteger("state", 2);
+                animator.SetInteger("state", 2);  //プレイヤーの速度が最高速より大きいとき、アニメーションを走るモーションにする
             }
 
-            if (!freeze_move && !touching_wall)
+            if (!freeze_move && !touching_wall)  //プレイヤーの速度が最高速より大きいとき、アニメーションを走るモーションにする
             {
                 animator.SetInteger("state", 2);
             }
         }
 
-        var isHit = Physics.SphereCast(transform.position, 0.5f, transform.up * -1.05f, out hit);
-        if (isHit)
+        var isHit = Physics.SphereCast(transform.position, 0.5f, transform.up * -1.05f, out hit);  //プレイヤーの真下にRaycast
+        if (isHit)  //Raycastに何かヒットしたとき
         {
-            if (!is_ground)
+            if (!is_ground)  //それが地面だったとき
             {
-                ASs[0].Play();
+                ASs[0].Play();  //着地音を鳴らす
             }
-            is_ground = true;
-            touching_wall = false;
+            is_ground = true;  //地面に接している状態と記録する
+            touching_wall = false;  //壁に接していない状態と記録する
         }
         else
         {
-            is_ground = false;
+            is_ground = false;  //Raycastに何もヒットしなかったとき、地面に接していない状態と記録する
         }
         //Debug.Log(freeze_move);
 
-        bo_fake.transform.LookAt(transform.position);
+        bo_fake.transform.LookAt(transform.position);  //棒の見た目の向きをリセットする
     }
 
-    public IEnumerator Jump_Set(Vector3 point)
+    public IEnumerator Jump_Set(Vector3 point)  //ジャンプの一連の処理
     {
-        if (rb.velocity.z > 0.2f || rb.velocity.z < -0.2f)
+        if (rb.velocity.z > 0.2f || rb.velocity.z < -0.2f)  //プレイヤーの速度が十分速いとき
         {
             //Debug.Log("StartCoroutine");
             //Debug.Log(point);
-            debug_sphere.transform.position = point;
-            freezed_velocity = rb.velocity;
-            freeze_move = true;
+            debug_sphere.transform.position = point;  //デバッグ用
+            freezed_velocity = rb.velocity;  //プレイヤーの速度を記録する
+            freeze_move = true;  //ジャンプするまでプレイヤーの速度を固定する
 
-            bo_end_point = point;
-            bo_lock = false;
+            bo_end_point = point;  //棒が触れた位置を記録する
+            bo_lock = false;  //棒の固定を解除する
 
             //Debug.Log("freezemove -> " + freeze_move);
-            if(forward > 0)
+            if(forward > 0)  //プレイヤーが前を向いているとき
             {
-                jump_distance = point.z - transform.position.z;
-                debug_sphere2.transform.position = new Vector3(0, 0, transform.position.z + (jump_distance / 2.0f));
+                jump_distance = point.z - transform.position.z;  //ジャンプする位置はプレイヤーの位置から棒が当たった場所の半分の位置にする
+                debug_sphere2.transform.position = new Vector3(0, 0, transform.position.z + (jump_distance / 2.0f));  //デバッグ用
             }
-            else
+            else  //プレイヤーが後ろを向いてるとき
             {
-                jump_distance = transform.position.z - point.z;
-                debug_sphere2.transform.position = new Vector3(0, 0, transform.position.z - (jump_distance / 2.0f));
+                jump_distance = transform.position.z - point.z;  //ジャンプする位置はプレイヤーの位置から棒が当たった場所の半分の位置にする
+                debug_sphere2.transform.position = new Vector3(0, 0, transform.position.z - (jump_distance / 2.0f));  //デバッグ用
             }
 
 
-            bo_fake.transform.localScale = (Vector3.Distance(transform.position , bo_end_point) / 13.0f) * new Vector3(1, 1, 1);
+            bo_fake.transform.localScale = (Vector3.Distance(transform.position , bo_end_point) / 13.0f) * new Vector3(1, 1, 1);  //棒の見た目を伸ばす
             
-            float distance = Mathf.Infinity;
-            while (true)
+            float distance = Mathf.Infinity;  //棒の当たった位置とプレイヤーの距離を格納する変数
+            while (true)  //プレイヤーがジャンプする位置に来るまで
             {
-                yield return null;
+                yield return null;  //１フレーム待つ
                 //Debug.Log("jump_distance");
-                if(forward > 0)
+                if(forward > 0)  //プレイヤーが前を向いているとき
                 {
-                    distance = point.z - transform.position.z;
+                    distance = point.z - transform.position.z;  //棒の当たった位置とプレイヤーの距離を測る
                 }
-                else
+                else  //プレイヤーが後ろを向いているとき
                 {
-                    distance = transform.position.z - point.z;
+                    distance = transform.position.z - point.z;  //棒の当たった位置とプレイヤーの距離を測る
                 }
                 
                 
                 //Debug.Log("distance: " + distance);
-                if (distance < jump_distance / 2)
+                if (distance < jump_distance / 2)  //ジャンプする位置に来たら
                 {
-                    break;
+                    break;  //次の処理に進む
                 }
             }
-            float jump_limited;
-            if(jump_force * jump_distance > max_jump_force)
+            float jump_limited;  //ジャンプ力を格納する変数
+            if(jump_force * jump_distance > max_jump_force)  //ジャンプ力が大きすぎそうなとき
             {
-                jump_limited = max_jump_force;
+                jump_limited = max_jump_force;  //ジャンプのパワーを最大値にする
             }
-            else
+            else  //それ以外のとき
             {
-                jump_limited = jump_force * jump_distance;
+                jump_limited = jump_force * jump_distance;  //棒の当たった場所からの距離からジャンプ力を決める
             }
-            rb.AddForce(Vector3.up * jump_limited, ForceMode.Impulse);
-            freeze_move = false;
+            rb.AddForce(Vector3.up * jump_limited, ForceMode.Impulse);  //プレイヤーの上方向に力を与えてジャンプさせる
+            freeze_move = false;  //操作の制限を解除する
             yield return null;
         }
         else
@@ -254,30 +254,30 @@ public class Player : MonoBehaviour
         }
     }
 
-    public IEnumerator WallJump(Vector3 point)
+    public IEnumerator WallJump(Vector3 point)  //壁ジャンプの一連の処理
     {
         //float w_jump_distance = Vector3.Distance(transform.position, point);
-        rb.velocity = Vector3.zero;
-        debug_sphere.transform.position = point;
-        Vector3 w_jump_vector = new Vector3 (0, point.y - transform.position.y, point.z - transform.position.z);
+        rb.velocity = Vector3.zero;  //プレイヤーの速度を0にする
+        debug_sphere.transform.position = point;  //デバッグ用
+        Vector3 w_jump_vector = new Vector3 (0, point.y - transform.position.y, point.z - transform.position.z);  //ジャンプする方向を棒を突き出した方向にする
         //Debug.Log(w_jump_vector);
-        debug_sphere2.transform.position = transform.position - w_jump_vector;
-        rb.AddForce(-w_jump_vector.normalized * wall_jump_force, ForceMode.Impulse);
+        debug_sphere2.transform.position = transform.position - w_jump_vector;  //デバッグ用
+        rb.AddForce(-w_jump_vector.normalized * wall_jump_force, ForceMode.Impulse);  //指定した方向にジャンプする
         yield return null;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)  //プレイヤーに何か当たったとき
     {
-        if(!is_ground)
+        if(!is_ground)  //接地していたら
         {
-            touching_wall = true;
+            touching_wall = true;  //壁に触っていることにする
         }
 
-        if(collision.transform.tag == "Enemy")
+        if(collision.transform.tag == "Enemy")  //当たったのが敵だったら
         {
-            hp--;
-            images[hp].SetActive(false);
-            if(hp == 0)
+            hp--;  //HPを１減らす
+            images[hp].SetActive(false);  //HP表示のハートを一つ非表示にする
+            if(hp == 0)  //HPが0になったら
             {
                 //GoToGameOver();
                 GameOverCanvas.SetActive(true);
@@ -285,22 +285,22 @@ public class Player : MonoBehaviour
             }
             else
             {
-                Damage();
+                Damage();  //HPが0でなければ無敵時間を発生させる
             }
         }
     }
 
-    private IEnumerator Damage()
+    private IEnumerator Damage()  //ダメージを受けたときの処理
     {
-        gameObject.layer = 10;
-        //eyes[0].SetActive(false);
+        gameObject.layer = 10;  //プレイヤーを無敵状態にする
+        //eyes[0].SetActive(false);  //プレイヤーキャラクターの目を瞑らせる
         //eyes[1].SetActive(false);
         //eyes[2].SetActive(true);
         //eyes[3].SetActive(true);
-        ASs[1].Play();
+        ASs[1].Play();  //ダメージ音を再生
 
-        yield return new WaitForSeconds(1.0f);
-        gameObject.layer = 0;
+        yield return new WaitForSeconds(1.0f);  //１秒無敵時間を継続
+        gameObject.layer = 0;  //プレイヤーの無敵状態を解除
         //eyes[0].SetActive(true);
         //eyes[1].SetActive(true);
         //eyes[2].SetActive(false);
