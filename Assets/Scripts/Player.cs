@@ -281,8 +281,7 @@ public class Player : MonoBehaviour
             {
                 //GoToGameOver();
                 GameOverCanvas.SetActive(true);
-                Invoke("FixDOF", 1f);
-
+                FixDOF();
             }
             else
             {
@@ -317,7 +316,7 @@ public class Player : MonoBehaviour
     void FixDOF()
     {
         var dof = ScriptableObject.CreateInstance<DepthOfField>();
-        dof.focusDistance.Override(4);
+        dof.focusDistance.Override(0.1f);
         PostProcessManager.instance.QuickVolume(postProcessGameObject.layer, 1, dof);
     }
 
