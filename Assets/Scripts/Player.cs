@@ -2,88 +2,76 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Rendering.PostProcessing;
-
 
 public class Player : MonoBehaviour
 {
-    private Rigidbody rb;  //rigidbodyを入れる変数
-    [SerializeField]  //これを書いた下の変数はpublicと同じようにUnityEditor上で指定できる
-    private float speed = 3.0f;  //speedって書いてるけどプレイヤーの加速度
+    private Rigidbody rb;
     [SerializeField]
-    private float max_speed = 5.0f;  //プレイヤーの最高速度
-    public int forward = 1;  //プレイヤーの向きを表す(前:1 後:-1)
-    private float jump_distance = Mathf.Infinity;  //プレイヤーがジャンプするx座標
-
-    private Vector3 freezed_velocity = Vector3.zero;  //ジャンプ操作をした瞬間の速度を記録する変数
-    private bool freeze_move = false;  //プレイヤーの速度を固定するかどうか
-
+    private float speed = 3.0f;
     [SerializeField]
-    private GameObject nose;  //プレイヤーの向きを確認するデバッグ用
+    private float max_speed = 5.0f;
+    public int forward = 1;
+    private float jump_distance = Mathf.Infinity;
+
+    private Vector3 freezed_velocity = Vector3.zero;
+    private bool freeze_move = false;
 
     [SerializeField]
-    private float jump_force = 10.0f;  //ジャンプの強さ
-    [SerializeField]
-    private float max_jump_force = 15.0f;  //跳びすぎないようにするためのジャンプの最大パワー
+    private GameObject nose;
 
     [SerializeField]
-    private float wall_jump_force = 20.0f;  //壁ジャンプのパワー
-
-    public bool is_ground = true;  //プレイヤーが着地しているかどうか
-
-    private RaycastHit hit;  //着地判定用のraycastの内容
-
-    public GameObject debug_sphere;  //デバッグ用 棒の当たった位置
-    public GameObject debug_sphere2;  //デバッグ用 ジャンプする位置
-
-    private bool break_coroutine = false;  //使われてないっぽい変数
-
-    public bool enable_turn= true;  //ジャンプするまで方向転換できなくする
-
-    private bool touching_wall = false;  //ジャンプするまでに壁に触れたかどうか
+    private float jump_force = 10.0f;
+    [SerializeField]
+    private float max_jump_force = 15.0f;
 
     [SerializeField]
-    private Animator animator;  //プレイヤーのanimatorを格納する変数
+    private float wall_jump_force = 20.0f;
+
+    public bool is_ground = true;
+
+    private RaycastHit hit;
+
+    public GameObject debug_sphere;
+    public GameObject debug_sphere2;
+
+    private bool break_coroutine = false;
+
+    public bool enable_turn= true;
+
+    private bool touching_wall = false;
 
     [SerializeField]
-    private GameObject bo_fake;  //棒の見た目のオブジェクト(判定ではない)
-    [SerializeField]
-    private float bo_length = 14.0f;  //棒が伸びる最大値
-    private Vector3 bo_end_point = Vector3.zero;  //棒の到達位置
+    private Animator animator;
 
     [SerializeField]
-    private GameObject hand_object;  //手の位置を入れておく
-
-    public bool bo_lock = false;  //棒の見た目を動かさないかどうか
+    private GameObject bo_fake;
+    [SerializeField]
+    private float bo_length = 14.0f;
+    private Vector3 bo_end_point = Vector3.zero;
 
     [SerializeField]
-    private GameObject player_model;  //モデルのオブジェクトを格納する
+    private GameObject hand_object;
 
-    private int max_hp = 3;  //HPの最大値(初期化用)
-    public int hp;  //プレイ中のHP
-
-    [SerializeField]
-    private GameObject[] images = new GameObject[3];  //HPのUIの画像
+    public bool bo_lock = false;
 
     [SerializeField]
-    private GameObject[] eyes = new GameObject[4];  //目の画像(0:左目通常 1:右目通常 2:左目瞑り 3:右目瞑り)
+    private GameObject player_model;
+
+    private int max_hp = 3;
+    public int hp;
 
     [SerializeField]
-    private AudioSource[] ASs;  //AudioSourceを格納する(配列じゃなくていいかも)
+    private GameObject[] images = new GameObject[3];
 
     [SerializeField]
-    private AudioClip[] ACs;  //音声素材を格納する
-
-    public GameObject GameOverCanvas;
+    private GameObject[] eyes = new GameObject[4];
 
     [SerializeField]
-    GameObject postProcessGameObject;
-
+    private AudioSource[] ASs;
 
     // Start is called before the first frame update
     void Start()
     {
-        //いろいろ初期化
         rb = transform.GetComponent<Rigidbody>();
         animator.SetInteger("state", 0);
         hp = max_hp;
@@ -93,52 +81,55 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float input_x = Input.GetAxis("Horizontal");  //プレイヤーの入力(-1 ~ 1)
+        float input_x = Input.GetAxis("Horizontal");
 
-        if (!bo_lock)  //棒が操作されていないとき
+        if (!bo_lock)
         {
-            //棒を動かないようにする(仮の対処)
             bo_fake.transform.position = transform.position + Vector3.up;
             bo_fake.transform.rotation = Quaternion.Euler(Vector3.zero);
         }
 
-        if (!freeze_move)  //ジャンプ動作中でないとき
+        if (!freeze_move)
         {
             if (enable_turn)
             {
-                if (input_x < 0)  //左に入力されたとき
+                if (input_x < 0)
                 {
                     forward = -1;
                     nose.transform.localPosition = Vector3.forward * -0.2f;
-                    animator.SetInteger("state", 1);  //アニメーションを歩きにする
+                    animator.SetInteger("state", 1);
 
-                    player_model.transform.rotation = Quaternion.Euler(0, 180, 0);  //モデルの向きを左にする
+                    player_model.transform.rotation = Quaternion.Euler(0, 180, 0);
                 }
-                else if (input_x > 0)  //右に入力されたとき
+                else if (input_x > 0)
                 {
                     forward = 1;
                     nose.transform.localPosition = Vector3.forward * 0.2f;
-                    animator.SetInteger("state", 1);  //アニメーションを歩きにする
+                    animator.SetInteger("state", 1);
 
-                    player_model.transform.rotation = Quaternion.Euler(0, 0, 0);  //モデルの向きを右にする
+                    player_model.transform.rotation = Quaternion.Euler(0, 0, 0);
                 }
                 else
                 {
-                    animator.SetInteger("state", 0);  //アニメーションを待機にする
+                    animator.SetInteger("state", 0);
                 }
             }
-            bo_lock = false;  //ジャンプ動作中でないなら棒の動きを固定する
+            bo_lock = false;
         }
         else
         {
-            if(rb.velocity.z < 0.01f && rb.velocity.z > -0.01f)  //動いてないとき
+            if(rb.velocity.z < 0.01f && rb.velocity.z > -0.01f)
             {
-                //ジャンプ動作をしているなら止める
                 StopCoroutine("Jump_Set");
                 freeze_move = false;
             }
+<<<<<<< HEAD
             bo_fake.transform.position = (bo_end_point + transform.position) / 2.0f;  //棒の見た目の位置を判定の位置にする  
             bo_fake.transform.LookAt(hand_object.transform.position);  //棒の向きを手の方向に向ける
+=======
+            bo_fake.transform.position = (bo_end_point + transform.position) / 2.0f;
+            bo_fake.transform.LookAt(hand_object.transform.position);
+>>>>>>> parent of 3a3f9d3... Merge branch 'master' of https://github.com/CreaGameProject/TeamP_project
         }
 
         if (!freeze_move && rb.velocity.z * forward < max_speed && !touching_wall)  //右に移動中の時
@@ -279,9 +270,13 @@ public class Player : MonoBehaviour
             images[hp].SetActive(false);  //HP表示のハートを一つ非表示にする
             if(hp == 0)  //HPが0になったら
             {
+<<<<<<< HEAD
                 //GoToGameOver();
                 GameOverCanvas.SetActive(true);
                 FixDOF();
+=======
+                GoToGameOver();
+>>>>>>> parent of 3a3f9d3... Merge branch 'master' of https://github.com/CreaGameProject/TeamP_project
             }
             else
             {
@@ -307,17 +302,14 @@ public class Player : MonoBehaviour
         //eyes[3].SetActive(false);
     }
 
-    //private void gotogameover()
-    //{
-    //    scenemanager.loadscene("gameoverscene");
-    //}
-
-    //ぼかす
-    void FixDOF()
+    private void GoToGameOver()
     {
+<<<<<<< HEAD
         var dof = ScriptableObject.CreateInstance<DepthOfField>();
         dof.focusDistance.Override(0.1f);
         PostProcessManager.instance.QuickVolume(postProcessGameObject.layer, 1, dof);
+=======
+        SceneManager.LoadScene("GameOverScene");
+>>>>>>> parent of 3a3f9d3... Merge branch 'master' of https://github.com/CreaGameProject/TeamP_project
     }
-
 }
