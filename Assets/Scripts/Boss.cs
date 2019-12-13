@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    public int Bosshp = 5;
+    int Bosshp = 5;
 
     private void OnCollisionEnter(Collision collision)
     {
