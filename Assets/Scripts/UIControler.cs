@@ -39,7 +39,7 @@ public class UIControler : MonoBehaviour
 
     }
 
-    //ぼかす
+    //ぼかすのを治す
     void FixDOF()
     {
         var dof = ScriptableObject.CreateInstance<DepthOfField>();
