@@ -1,4 +1,3 @@
->%YAML 1.1
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
@@ -2686,7 +2685,6 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 308385dc8c9e9e34db6b2bf6f9e7e045,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 308385dc8c9e9e34db6b2bf6f9e7e045,
