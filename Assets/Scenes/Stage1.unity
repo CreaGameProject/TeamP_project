@@ -60521,11 +60521,6 @@ PrefabInstance:
       propertyPath: GameOverCanvas
       value:
       objectReference: {fileID: 276926982}
-    - target: {fileID: 6220455957382507326, guid: ec61dfa7703a867409c5f714c473b9e0,
-        type: 3}
-      propertyPath: postProcessGameObject
-      value: 
-      objectReference: {fileID: 1132550436}
     - target: {fileID: 6220455957897650669, guid: ec61dfa7703a867409c5f714c473b9e0,
         type: 3}
       propertyPath: auto_angle
