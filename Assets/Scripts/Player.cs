@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Player : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class Player : MonoBehaviour
 
     private bool break_coroutine = false;
 
-    public bool enable_turn= true;
+    public bool enable_turn = true;
 
     private bool touching_wall = false;
 
@@ -118,34 +119,31 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if(rb.velocity.z < 0.01f && rb.velocity.z > -0.01f)
+            if (rb.velocity.z < 0.01f && rb.velocity.z > -0.01f)
             {
                 StopCoroutine("Jump_Set");
                 freeze_move = false;
             }
-<<<<<<< HEAD
+
             bo_fake.transform.position = (bo_end_point + transform.position) / 2.0f;  //棒の見た目の位置を判定の位置にする  
             bo_fake.transform.LookAt(hand_object.transform.position);  //棒の向きを手の方向に向ける
-=======
-            bo_fake.transform.position = (bo_end_point + transform.position) / 2.0f;
-            bo_fake.transform.LookAt(hand_object.transform.position);
->>>>>>> parent of 3a3f9d3... Merge branch 'master' of https://github.com/CreaGameProject/TeamP_project
+
         }
 
         if (!freeze_move && rb.velocity.z * forward < max_speed && !touching_wall)  //右に移動中の時
         {
             rb.velocity += new Vector3(0, 0, input_x * speed * Time.deltaTime);  //プレイヤーの速度を上げる
-            if(max_speed - (rb.velocity.z * forward) < 0.3f)  //プレイヤーの速度が最高速近くのとき、
+            if (max_speed - (rb.velocity.z * forward) < 0.3f)  //プレイヤーの速度が最高速近くのとき、
             {
                 animator.SetInteger("state", 2);  //アニメーションを走るモーションにする
             }
         }
         else
         {
-            if(max_speed > rb.velocity.z * forward)  //左に移動中、プレイヤーの速度が最高速より小さいとき
+            if (max_speed > rb.velocity.z * forward)  //左に移動中、プレイヤーの速度が最高速より小さいとき
             {
-                rb.velocity += new Vector3 (0, 0, speed * Time.deltaTime * forward);  //プレイヤーの速度を上げる
-                
+                rb.velocity += new Vector3(0, 0, speed * Time.deltaTime * forward);  //プレイヤーの速度を上げる
+
             }
             else
             {
@@ -191,7 +189,7 @@ public class Player : MonoBehaviour
             bo_lock = false;  //棒の固定を解除する
 
             //Debug.Log("freezemove -> " + freeze_move);
-            if(forward > 0)  //プレイヤーが前を向いているとき
+            if (forward > 0)  //プレイヤーが前を向いているとき
             {
                 jump_distance = point.z - transform.position.z;  //ジャンプする位置はプレイヤーの位置から棒が当たった場所の半分の位置にする
                 debug_sphere2.transform.position = new Vector3(0, 0, transform.position.z + (jump_distance / 2.0f));  //デバッグ用
@@ -203,14 +201,14 @@ public class Player : MonoBehaviour
             }
 
 
-            bo_fake.transform.localScale = (Vector3.Distance(transform.position , bo_end_point) / 13.0f) * new Vector3(1, 1, 1);  //棒の見た目を伸ばす
-            
+            bo_fake.transform.localScale = (Vector3.Distance(transform.position, bo_end_point) / 13.0f) * new Vector3(1, 1, 1);  //棒の見た目を伸ばす
+
             float distance = Mathf.Infinity;  //棒の当たった位置とプレイヤーの距離を格納する変数
             while (true)  //プレイヤーがジャンプする位置に来るまで
             {
                 yield return null;  //１フレーム待つ
                 //Debug.Log("jump_distance");
-                if(forward > 0)  //プレイヤーが前を向いているとき
+                if (forward > 0)  //プレイヤーが前を向いているとき
                 {
                     distance = point.z - transform.position.z;  //棒の当たった位置とプレイヤーの距離を測る
                 }
@@ -218,8 +216,8 @@ public class Player : MonoBehaviour
                 {
                     distance = transform.position.z - point.z;  //棒の当たった位置とプレイヤーの距離を測る
                 }
-                
-                
+
+
                 //Debug.Log("distance: " + distance);
                 if (distance < jump_distance / 2)  //ジャンプする位置に来たら
                 {
@@ -227,7 +225,7 @@ public class Player : MonoBehaviour
                 }
             }
             float jump_limited;  //ジャンプ力を格納する変数
-            if(jump_force * jump_distance > max_jump_force)  //ジャンプ力が大きすぎそうなとき
+            if (jump_force * jump_distance > max_jump_force)  //ジャンプ力が大きすぎそうなとき
             {
                 jump_limited = max_jump_force;  //ジャンプのパワーを最大値にする
             }
@@ -250,7 +248,7 @@ public class Player : MonoBehaviour
         //float w_jump_distance = Vector3.Distance(transform.position, point);
         rb.velocity = Vector3.zero;  //プレイヤーの速度を0にする
         debug_sphere.transform.position = point;  //デバッグ用
-        Vector3 w_jump_vector = new Vector3 (0, point.y - transform.position.y, point.z - transform.position.z);  //ジャンプする方向を棒を突き出した方向にする
+        Vector3 w_jump_vector = new Vector3(0, point.y - transform.position.y, point.z - transform.position.z);  //ジャンプする方向を棒を突き出した方向にする
         //Debug.Log(w_jump_vector);
         debug_sphere2.transform.position = transform.position - w_jump_vector;  //デバッグ用
         rb.AddForce(-w_jump_vector.normalized * wall_jump_force, ForceMode.Impulse);  //指定した方向にジャンプする
@@ -259,24 +257,22 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)  //プレイヤーに何か当たったとき
     {
-        if(!is_ground)  //接地していたら
+        if (!is_ground)  //接地していたら
         {
             touching_wall = true;  //壁に触っていることにする
         }
 
-        if(collision.transform.tag == "Enemy")  //当たったのが敵だったら
+        if (collision.transform.tag == "Enemy")  //当たったのが敵だったら
         {
             hp--;  //HPを１減らす
             images[hp].SetActive(false);  //HP表示のハートを一つ非表示にする
-            if(hp == 0)  //HPが0になったら
+            if (hp == 0)  //HPが0になったら
             {
-<<<<<<< HEAD
+
                 //GoToGameOver();
                 GameOverCanvas.SetActive(true);
                 FixDOF();
-=======
-                GoToGameOver();
->>>>>>> parent of 3a3f9d3... Merge branch 'master' of https://github.com/CreaGameProject/TeamP_project
+
             }
             else
             {
@@ -304,12 +300,10 @@ public class Player : MonoBehaviour
 
     private void GoToGameOver()
     {
-<<<<<<< HEAD
+
         var dof = ScriptableObject.CreateInstance<DepthOfField>();
         dof.focusDistance.Override(0.1f);
         PostProcessManager.instance.QuickVolume(postProcessGameObject.layer, 1, dof);
-=======
-        SceneManager.LoadScene("GameOverScene");
->>>>>>> parent of 3a3f9d3... Merge branch 'master' of https://github.com/CreaGameProject/TeamP_project
+
     }
 }
