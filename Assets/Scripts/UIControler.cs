@@ -29,15 +29,11 @@ public class UIControler : MonoBehaviour
         TitleImage.SetActive(false);
         Invoke("FixDOF", 1f);
     }
-<<<<<<< HEAD
+
     public void Retryclick()
     {
 
     }
-
-    //ぼかすのを治す
-=======
->>>>>>> parent of 3a3f9d3... Merge branch 'master' of https://github.com/CreaGameProject/TeamP_project
     void FixDOF()
     {
         var dof = ScriptableObject.CreateInstance<DepthOfField>();

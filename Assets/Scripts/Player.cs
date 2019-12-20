@@ -269,9 +269,9 @@ public class Player : MonoBehaviour
             if (hp == 0)  //HPが0になったら
             {
 
-                //GoToGameOver();
-                GameOverCanvas.SetActive(true);
-                FixDOF();
+                GoToGameOver();
+                //GameOverCanvas.SetActive(true);
+                //FixDOF();
 
             }
             else
@@ -303,7 +303,7 @@ public class Player : MonoBehaviour
 
         var dof = ScriptableObject.CreateInstance<DepthOfField>();
         dof.focusDistance.Override(0.1f);
-        PostProcessManager.instance.QuickVolume(postProcessGameObject.layer, 1, dof);
+        //PostProcessManager.instance.QuickVolume(postProcessGameObject.layer, 1, dof);
 
     }
 }
