@@ -28,7 +28,7 @@ public class Boss : MonoBehaviour
     }
     /*public void GoToGameClear()
     {
-       GoToGameClear();
-    }*/
+        SceneManager.LoadScene("GameClearScene");
+    }
 
 }
