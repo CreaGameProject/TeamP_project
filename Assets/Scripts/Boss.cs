@@ -4,31 +4,42 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    int Bosshp = 5;
+    public int Bosshp = 5;
 
     public void OnCollisionEnter(Collision other)
     {
-        //雑魚がボスに五回当たったらゲームクリア
-        if (other.gameObject.tag == "Enemy")
+        Debug.Log(other.transform.name);
+
+        //GetConmponent 別のスクリプトを取得
+        if (other.transform.GetComponent<Zako1>())
         {
-            Bosshp--;
-
-            //images[Bosshp].SetActive(false);余裕があれば表示させます
-
-            if (Bosshp == 0)
+            if (other.transform.GetComponent<Zako1>().is_attacked)
             {
-                Destroy(transform.root.gameObject);
 
-                SceneManager.LoadScene("GameClear");
-            }
+                //雑魚がボスに五回当たったらゲームクリア
+                if (other.transform.tag == "Enemy")
+                {
+                    Bosshp--;
 
-            Debug.Log(other.gameObject.name);
+                    //images[Bosshp].SetActive(false);余裕があれば表示させます
 
+                    if (Bosshp == 0)
+                    {
+                        Destroy(transform.root.gameObject);
+
+                        SceneManager.LoadScene("GameClear");
+                    }
+
+                    Debug.Log(other.transform.name);
+                    Debug.Log(Bosshp);
+
+                }
+             }
         }
     }
     /*public void GoToGameClear()
     {
         SceneManager.LoadScene("GameClearScene");
-    }
+    }*/
 
 }
