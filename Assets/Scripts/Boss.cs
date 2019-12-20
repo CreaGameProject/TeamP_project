@@ -29,5 +29,5 @@ public class Boss : MonoBehaviour
     {
         SceneManager.LoadScene("GameClearScene");
     }
-    
+
 }

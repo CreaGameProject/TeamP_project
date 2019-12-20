@@ -49,5 +49,3 @@ Thumbs.db
 
 #python bytecode cache, for some plugins.
 *.pyc
-
--/CurrentLayout-default.dwlk
