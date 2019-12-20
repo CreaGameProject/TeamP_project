@@ -6,8 +6,12 @@ using UnityEngine.Rendering.PostProcessing;
 public class UIControler : MonoBehaviour
 {
     public GameObject StartButton;
+    public GameObject RetryButton;
     public GameObject EndButton;
     public GameObject TitleImage;
+    public GameObject Life;
+    public GameObject GameOverCanvas;
+
     [SerializeField]
     GameObject postProcessGameObject;
 
@@ -22,32 +26,31 @@ public class UIControler : MonoBehaviour
     {
         
     }
-    public void Onclick()
+    public void Startclick()
     {
         StartButton.SetActive(false);
         EndButton.SetActive(false);
         TitleImage.SetActive(false);
+        Life.SetActive(true);
         Invoke("FixDOF", 1f);
     }
-<<<<<<< HEAD
     public void Retryclick()
     {
 
     }
 
     //ぼかすのを治す
-=======
->>>>>>> parent of 3a3f9d3... Merge branch 'master' of https://github.com/CreaGameProject/TeamP_project
     void FixDOF()
     {
         var dof = ScriptableObject.CreateInstance<DepthOfField>();
         dof.focusDistance.Override(4);
         PostProcessManager.instance.QuickVolume(postProcessGameObject.layer, 1, dof);
     }
-
+    //ゲーム終了
     public void EndGame()
     {
         UnityEditor.EditorApplication.isPlaying = false;
 		Application.Quit();
     }
+
 }
