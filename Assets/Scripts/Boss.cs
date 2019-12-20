@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
@@ -6,10 +7,10 @@ public class Boss : MonoBehaviour
 {
     int Bosshp = 5;
 
-    public void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision collision)
     {
-        //雑魚がボスに五回当たったらゲームクリア
-        if (other.gameObject.tag == "Enemy")
+
+        if (collision.transform.tag == "Enemy")
         {
             Bosshp--;
 
@@ -17,18 +18,16 @@ public class Boss : MonoBehaviour
 
             if (Bosshp == 0)
             {
-                Destroy(transform.root.gameObject);
-
-                SceneManager.LoadScene("GameClear");
+                GoToGameClear();
             }
 
-            Debug.Log(other.gameObject.name);
+            Debug.Log(collision.gameObject.name);
 
         }
     }
-    /*public void GoToGameClear()
+    private void GoToGameClear()
     {
         SceneManager.LoadScene("GameClearScene");
     }
-
+    
 }

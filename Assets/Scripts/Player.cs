@@ -137,7 +137,7 @@ public class Player : MonoBehaviour
                 StopCoroutine("Jump_Set");
                 freeze_move = false;
             }
-            bo_fake.transform.position = (bo_end_point + transform.position) / 2.0f;  //棒の見た目の位置を判定の位置にする
+            bo_fake.transform.position = (bo_end_point + transform.position) / 2.0f;  //棒の見た目の位置を判定の位置にする  
             bo_fake.transform.LookAt(hand_object.transform.position);  //棒の向きを手の方向に向ける
         }
 
@@ -154,7 +154,7 @@ public class Player : MonoBehaviour
             if(max_speed > rb.velocity.z * forward)  //左に移動中、プレイヤーの速度が最高速より小さいとき
             {
                 rb.velocity += new Vector3 (0, 0, speed * Time.deltaTime * forward);  //プレイヤーの速度を上げる
-
+                
             }
             else
             {
@@ -213,7 +213,7 @@ public class Player : MonoBehaviour
 
 
             bo_fake.transform.localScale = (Vector3.Distance(transform.position , bo_end_point) / 13.0f) * new Vector3(1, 1, 1);  //棒の見た目を伸ばす
-
+            
             float distance = Mathf.Infinity;  //棒の当たった位置とプレイヤーの距離を格納する変数
             while (true)  //プレイヤーがジャンプする位置に来るまで
             {
@@ -227,8 +227,8 @@ public class Player : MonoBehaviour
                 {
                     distance = transform.position.z - point.z;  //棒の当たった位置とプレイヤーの距離を測る
                 }
-
-
+                
+                
                 //Debug.Log("distance: " + distance);
                 if (distance < jump_distance / 2)  //ジャンプする位置に来たら
                 {
