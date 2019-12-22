@@ -18,9 +18,9 @@ public class Zako1 : MonoBehaviour
 
     private Rigidbody rb;
 
-    private bool is_active = true;
+    public bool is_active = true;
 
-    private bool is_attacked = false;
+    public bool is_attacked = false;
 
     private float offset;
 
