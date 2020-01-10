@@ -7738,7 +7738,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 951d81475867bbc43a754a64f44756f8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 731081caad83e6f4fb3113ebf1a285bc, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -21699,7 +21699,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 1d970326964498d40b1071b88e6b064f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.72
+      value: 0.51
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1d970326964498d40b1071b88e6b064f,
         type: 3}
@@ -48482,7 +48482,7 @@ RectTransform:
   m_GameObject: {fileID: 1195107842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 0.45, y: 0.45, z: 1}
   m_Children: []
   m_Father: {fileID: 1552749702}
   m_RootOrder: 2
@@ -48490,7 +48490,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: 1000, y: 500}
+  m_SizeDelta: {x: 2048, y: 1024}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1195107844
 MonoBehaviour:
@@ -48512,7 +48512,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 72cb03f808c69754195fe3fccbfbc855, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d90894afdb19e4e48ab1af39e68664f4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -60521,6 +60521,11 @@ PrefabInstance:
       propertyPath: GameOverCanvas
       value: 
       objectReference: {fileID: 276926982}
+    - target: {fileID: 6220455957382507326, guid: ec61dfa7703a867409c5f714c473b9e0,
+        type: 3}
+      propertyPath: speed
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6220455957897650669, guid: ec61dfa7703a867409c5f714c473b9e0,
         type: 3}
       propertyPath: auto_angle
@@ -60531,6 +60536,16 @@ PrefabInstance:
       propertyPath: bo_fake
       value: 
       objectReference: {fileID: 345148984}
+    - target: {fileID: 6220455957897650669, guid: ec61dfa7703a867409c5f714c473b9e0,
+        type: 3}
+      propertyPath: move_time
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6220455957897650669, guid: ec61dfa7703a867409c5f714c473b9e0,
+        type: 3}
+      propertyPath: speed
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6220455957897650670, guid: ec61dfa7703a867409c5f714c473b9e0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -60554,7 +60569,7 @@ PrefabInstance:
     - target: {fileID: 6220455957611243658, guid: ec61dfa7703a867409c5f714c473b9e0,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6220455956744918802, guid: ec61dfa7703a867409c5f714c473b9e0,
         type: 3}
@@ -69820,7 +69835,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 1d970326964498d40b1071b88e6b064f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.0959325
+      value: 0.86
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1d970326964498d40b1071b88e6b064f,
         type: 3}

@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 {
     private Rigidbody rb;  //rigidbodyを入れる変数
     [SerializeField]  //これを書いた下の変数はpublicと同じようにUnityEditor上で指定できる
-    private float speed = 3.0f;  //speedって書いてるけどプレイヤーの加速度
+    private float speed = 5.0f;  //speedって書いてるけどプレイヤーの加速度
     [SerializeField]
     private float max_speed = 5.0f;  //プレイヤーの最高速度
     public int forward = 1;  //プレイヤーの向きを表す(前:1 後:-1)
@@ -298,6 +298,7 @@ public class Player : MonoBehaviour
         //eyes[2].SetActive(true);
         //eyes[3].SetActive(true);
         ASs[1].Play();  //ダメージ音を再生
+        animator.SetTrigger("damage");
 
         yield return new WaitForSeconds(1.0f);  //１秒無敵時間を継続
         gameObject.layer = 0;  //プレイヤーの無敵状態を解除

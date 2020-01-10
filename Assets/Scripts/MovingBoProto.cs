@@ -8,14 +8,14 @@ public class MovingBoProto : MonoBehaviour
     [SerializeField]
     private GameObject bo; //動かす棒のオブジェクト
     [SerializeField]
-    private float move_time = 0.4f; //棒が動く時間
+    private float move_time = 0.1f; //棒が動く時間
     private float dead_value = 0.4f;
     private bool enable_move = true; //操作を受け付けるかどうか
     private bool pushing_now = false; //棒を押しだす状態かどうか
     private bool pulling_now = false; //棒を引く状態かどうか
     private Rigidbody bo_rb; //棒オブジェクトのRigidBody
     [SerializeField]
-    private float speed = 2.0f; //棒を動かすスピード
+    private float speed = 8.0f; //棒を動かすスピード
     [SerializeField]
     private float wait_time = 0.4f;
     private GameObject player_go;
@@ -83,6 +83,7 @@ public class MovingBoProto : MonoBehaviour
             bo.transform.localPosition = Vector3.zero; //棒が動いていないときは最初の位置に戻す
             move_pos = Vector3.zero;
             bo.transform.localScale = Vector3.zero;
+            bo_fake.transform.localScale = Vector3.zero;
         }
     }
 
