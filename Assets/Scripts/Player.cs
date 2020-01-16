@@ -126,6 +126,7 @@ public class Player : MonoBehaviour
                 else
                 {
                     animator.SetInteger("state", 0);  //アニメーションを待機にする
+                    if(is_ground) rb.velocity *= 0.2f * Time.deltaTime;
                 }
             }
             bo_lock = false;  //ジャンプ動作中でないなら棒の動きを固定する
@@ -168,15 +169,19 @@ public class Player : MonoBehaviour
             }
         }
 
-        var isHit = Physics.SphereCast(transform.position, 0.5f, transform.up * -1.05f, out hit);  //プレイヤーの真下にRaycast
+        RaycastHit hit;
+        var isHit = Physics.SphereCast(transform.position, 0.5f, transform.up * -1, out hit, 0.55f);  //プレイヤーの真下にRaycast
         if (isHit)  //Raycastに何かヒットしたとき
         {
             if (!is_ground)  //それが地面だったとき
             {
                 ASs[0].Play();  //着地音を鳴らす
             }
-            is_ground = true;  //地面に接している状態と記録する
-            touching_wall = false;  //壁に接していない状態と記録する
+            if (hit.transform.tag == "Terrain")
+            {
+                is_ground = true;  //地面に接している状態と記録する
+                touching_wall = false;  //壁に接していない状態と記録する
+            }
         }
         else
         {

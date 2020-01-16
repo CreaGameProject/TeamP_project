@@ -204,7 +204,7 @@ public class MovingBoProto : MonoBehaviour
         if (!player_sc.bo_lock)
         {
             bo_fake.transform.position = (transform.position + bo.transform.position) / 2.0f;
-            bo_fake.transform.LookAt(player_go.transform.position);
+            bo_fake.transform.LookAt(transform.position);
         }
         bo_fake.transform.localScale = (Vector3.Distance(player_go.transform.position, bo.transform.position) / 13.0f) * new Vector3(1, 1, 1);
     }
