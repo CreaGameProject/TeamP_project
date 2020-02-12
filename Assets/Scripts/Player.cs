@@ -8,8 +8,9 @@ using UnityEngine.Rendering.PostProcessing;
 public class Player : MonoBehaviour
 {
     private Rigidbody rb;  //rigidbodyを入れる変数
+    private bool enable_move = true;
     [SerializeField]  //これを書いた下の変数はpublicと同じようにUnityEditor上で指定できる
-    private float speed = 3.0f;  //speedって書いてるけどプレイヤーの加速度
+    private float speed = 5.0f;  //speedって書いてるけどプレイヤーの加速度
     [SerializeField]
     private float max_speed = 5.0f;  //プレイヤーの最高速度
     public int forward = 1;  //プレイヤーの向きを表す(前:1 後:-1)
@@ -102,14 +103,14 @@ public class Player : MonoBehaviour
             bo_fake.transform.rotation = Quaternion.Euler(Vector3.zero);
         }
 
-        if (!freeze_move)  //ジャンプ動作中でないとき
+        if (enable_move)  //操作を受け付けているとき
         {
             if (enable_turn)
             {
                 if (input_x < 0)  //左に入力されたとき
                 {
                     forward = -1;
-                    nose.transform.localPosition = Vector3.forward * -0.2f;
+                    //nose.transform.localPosition = Vector3.forward * -0.2f;
                     animator.SetInteger("state", 1);  //アニメーションを歩きにする
 
                     player_model.transform.rotation = Quaternion.Euler(0, 180, 0);  //モデルの向きを左にする
@@ -117,7 +118,7 @@ public class Player : MonoBehaviour
                 else if (input_x > 0)  //右に入力されたとき
                 {
                     forward = 1;
-                    nose.transform.localPosition = Vector3.forward * 0.2f;
+                    //nose.transform.localPosition = Vector3.forward * 0.2f;
                     animator.SetInteger("state", 1);  //アニメーションを歩きにする
 
                     player_model.transform.rotation = Quaternion.Euler(0, 0, 0);  //モデルの向きを右にする
@@ -125,6 +126,7 @@ public class Player : MonoBehaviour
                 else
                 {
                     animator.SetInteger("state", 0);  //アニメーションを待機にする
+                    if(is_ground) rb.velocity *= 0.2f * Time.deltaTime;
                 }
             }
             bo_lock = false;  //ジャンプ動作中でないなら棒の動きを固定する
@@ -141,7 +143,7 @@ public class Player : MonoBehaviour
             bo_fake.transform.LookAt(hand_object.transform.position);  //棒の向きを手の方向に向ける
         }
 
-        if (!freeze_move && rb.velocity.z * forward < max_speed && !touching_wall)  //右に移動中の時
+        if (!freeze_move && rb.velocity.z * forward < max_speed && !touching_wall　&& enable_move)  //右に移動中の時
         {
             rb.velocity += new Vector3(0, 0, input_x * speed * Time.deltaTime);  //プレイヤーの速度を上げる
             if(max_speed - (rb.velocity.z * forward) < 0.3f)  //プレイヤーの速度が最高速近くのとき、
@@ -151,7 +153,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if(max_speed > rb.velocity.z * forward)  //左に移動中、プレイヤーの速度が最高速より小さいとき
+            if(max_speed > rb.velocity.z * forward && enable_move)  //左に移動中、プレイヤーの速度が最高速より小さいとき
             {
                 rb.velocity += new Vector3 (0, 0, speed * Time.deltaTime * forward);  //プレイヤーの速度を上げる
 
@@ -167,15 +169,19 @@ public class Player : MonoBehaviour
             }
         }
 
-        var isHit = Physics.SphereCast(transform.position, 0.5f, transform.up * -1.05f, out hit);  //プレイヤーの真下にRaycast
+        RaycastHit hit;
+        var isHit = Physics.SphereCast(transform.position, 0.5f, transform.up * -1, out hit, 0.55f);  //プレイヤーの真下にRaycast
         if (isHit)  //Raycastに何かヒットしたとき
         {
             if (!is_ground)  //それが地面だったとき
             {
                 ASs[0].Play();  //着地音を鳴らす
             }
-            is_ground = true;  //地面に接している状態と記録する
-            touching_wall = false;  //壁に接していない状態と記録する
+            if (hit.transform.tag == "Terrain")
+            {
+                is_ground = true;  //地面に接している状態と記録する
+                touching_wall = false;  //壁に接していない状態と記録する
+            }
         }
         else
         {
@@ -252,6 +258,8 @@ public class Player : MonoBehaviour
         {
             //Debug.Log("Ignore");
         }
+
+        if (Input.GetKey(KeyCode.X)) animator.SetInteger("state", 3);
     }
 
     public IEnumerator WallJump(Vector3 point)  //壁ジャンプの一連の処理
@@ -293,14 +301,17 @@ public class Player : MonoBehaviour
     private IEnumerator Damage()  //ダメージを受けたときの処理
     {
         gameObject.layer = 10;  //プレイヤーを無敵状態にする
+        enable_move = false;  //操作を受け付けなくする
         //eyes[0].SetActive(false);  //プレイヤーキャラクターの目を瞑らせる
         //eyes[1].SetActive(false);
         //eyes[2].SetActive(true);
         //eyes[3].SetActive(true);
         ASs[1].Play();  //ダメージ音を再生
+        animator.SetInteger("state", 3);  //ダメージ時のアニメーションに遷移
 
         yield return new WaitForSeconds(1.0f);  //１秒無敵時間を継続
         gameObject.layer = 0;  //プレイヤーの無敵状態を解除
+        enable_move = true;  //操作できるようにする
         //eyes[0].SetActive(true);
         //eyes[1].SetActive(true);
         //eyes[2].SetActive(false);
