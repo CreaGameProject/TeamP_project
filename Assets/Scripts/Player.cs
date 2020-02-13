@@ -283,11 +283,12 @@ public class Player : MonoBehaviour
 
         if(collision.transform.tag == "Enemy")  //当たったのが敵だったら
         {
+            //float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
+			//gameObject.GetComponent<SpriteRenderer> ().color =  new Color(1f,1f,1f,level);
             hp--;  //HPを１減らす
             images[hp].SetActive(false);  //HP表示のハートを一つ非表示にする
             if(hp == 0)  //HPが0になったら
             {
-                //GoToGameOver();
                 GameOverCanvas.SetActive(true);
                 FixDOF();
             }
@@ -317,11 +318,6 @@ public class Player : MonoBehaviour
         //eyes[2].SetActive(false);
         //eyes[3].SetActive(false);
     }
-
-    //private void gotogameover()
-    //{
-    //    scenemanager.loadscene("gameoverscene");
-    //}
 
     //ぼかす
     void FixDOF()

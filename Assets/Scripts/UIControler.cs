@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
+
 
 public class UIControler : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class UIControler : MonoBehaviour
     public GameObject EndButton;
     public GameObject TitleImage;
     public GameObject Life;
-    public GameObject GameOverCanvas;
+
 
     [SerializeField]
     GameObject postProcessGameObject;
@@ -36,7 +38,7 @@ public class UIControler : MonoBehaviour
     }
     public void Retryclick()
     {
-
+        SceneManager.LoadScene("Stage1");
     }
 
     //ぼかすのを治す

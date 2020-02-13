@@ -172,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.020314107, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -783,7 +783,6 @@ MonoBehaviour:
   EndButton: {fileID: 17664027}
   TitleImage: {fileID: 0}
   Life: {fileID: 0}
-  GameOverCanvas: {fileID: 0}
   postProcessGameObject: {fileID: 0}
 --- !u!1001 &20460341
 PrefabInstance:
@@ -10440,10 +10439,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartButton: {fileID: 0}
   RetryButton: {fileID: 381461879}
-  EndButton: {fileID: 17664027}
+  EndButton: {fileID: 0}
   TitleImage: {fileID: 0}
   Life: {fileID: 0}
-  GameOverCanvas: {fileID: 0}
   postProcessGameObject: {fileID: 1132550436}
 --- !u!1001 &381936833
 PrefabInstance:
@@ -67840,7 +67838,6 @@ MonoBehaviour:
   EndButton: {fileID: 917099970}
   TitleImage: {fileID: 1195107842}
   Life: {fileID: 1557233797}
-  GameOverCanvas: {fileID: 0}
   postProcessGameObject: {fileID: 1132550436}
 --- !u!114 &1822598543
 MonoBehaviour:
