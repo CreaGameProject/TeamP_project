@@ -81,7 +81,7 @@
       <HintPath>C:/Users/aya29/Documents/GitHub/TeamP_project/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Cinemachine">
-      <HintPath>C:/Users/keiji/OneDrive/ドキュメント/GitHub/TeamP_project/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+      <HintPath>C:/Users/aya29/Documents/GitHub/TeamP_project/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>C:/Users/aya29/Documents/GitHub/TeamP_project/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
@@ -105,13 +105,13 @@
       <HintPath>C:/Users/aya29/Documents/GitHub/TeamP_project/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>C:/Users/keiji/OneDrive/ドキュメント/GitHub/TeamP_project/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>C:/Users/aya29/Documents/GitHub/TeamP_project/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>C:/Users/aya29/Documents/GitHub/TeamP_project/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>C:/Users/keiji/OneDrive/ドキュメント/GitHub/TeamP_project/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+      <HintPath>C:/Users/aya29/Documents/GitHub/TeamP_project/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/Users/aya29/Documents/GitHub/TeamP_project/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>

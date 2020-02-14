@@ -22,9 +22,18 @@ public class UIControler : MonoBehaviour
     private Player player_sc;  //Playerクラス継承用
     private bool is_gameover = false;  //ゲームオーバー時の処理を一回のみ行うための変数
 
+    public AudioClip gameoverSE;
+
+
+    public AudioClip startSE;
+    AudioSource audioSource;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         player_sc = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();  //Playerクラスを取得
         postProcessProfile = postProcessVolume.profile;  //PostProcessProfileを取得
         dof = postProcessProfile.GetSetting<DepthOfField>();  //DepthOfFieldを取得
@@ -37,12 +46,14 @@ public class UIControler : MonoBehaviour
         //プレイヤーのHPが0になったとき一度だけ画面をぼかす
         if (player_sc.hp == 0 && !is_gameover)
         {
+            audioSource.PlayOneShot(gameoverSE);
             is_gameover = true;
             dof.focalLength.Override(0.1f);
         }
     }
     public void Startclick()
     {
+        audioSource.PlayOneShot(startSE);
         StartButton.SetActive(false);
         EndButton.SetActive(false);
         TitleImage.SetActive(false);
