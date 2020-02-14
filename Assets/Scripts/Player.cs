@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
 
                     player_model.transform.rotation = Quaternion.Euler(0, 180, 0);  //モデルの向きを左にする
                 }
-                else if (input_x > 0)  //右に入力されたとき
+                else if (input_x > 0)  //右に入力されたとき 
                 {
                     forward = 1;
                     //nose.transform.localPosition = Vector3.forward * 0.2f;
