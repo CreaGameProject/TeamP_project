@@ -70,10 +70,12 @@ public class Player : MonoBehaviour
     private GameObject[] eyes = new GameObject[4];  //目の画像(0:左目通常 1:右目通常 2:左目瞑り 3:右目瞑り)
 
     [SerializeField]
-    private AudioSource[] ASs;  //AudioSourceを格納する(配列じゃなくていいかも)
+    private AudioSource AS;
 
     [SerializeField]
-    private AudioClip[] ACs;  //音声素材を格納する
+    private AudioClip on_groundSE; //音声素材を格納する
+    [SerializeField]
+    private AudioClip damageSE;
 
     public GameObject GameOverCanvas;
 
@@ -88,7 +90,7 @@ public class Player : MonoBehaviour
         rb = transform.GetComponent<Rigidbody>();
         animator.SetInteger("state", 0);
         hp = max_hp;
-        ASs = gameObject.GetComponents<AudioSource>();
+        AS = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -175,7 +177,7 @@ public class Player : MonoBehaviour
         {
             if (!is_ground)  //それが地面だったとき
             {
-                ASs[0].Play();  //着地音を鳴らす
+                AS.PlayOneShot(on_groundSE);  //着地音を鳴らす
             }
             if (hit.transform.tag == "Terrain")
             {
@@ -294,7 +296,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                Damage();  //HPが0でなければ無敵時間を発生させる
+                StartCoroutine(Damage());  //HPが0でなければ無敵時間を発生させる
             }
         }
     }
@@ -307,7 +309,7 @@ public class Player : MonoBehaviour
         //eyes[1].SetActive(false);
         //eyes[2].SetActive(true);
         //eyes[3].SetActive(true);
-        ASs[1].Play();  //ダメージ音を再生
+        AS.PlayOneShot(damageSE);  //ダメージ音を再生
         animator.SetInteger("state", 3);  //ダメージ時のアニメーションに遷移
 
         yield return new WaitForSeconds(1.0f);  //１秒無敵時間を継続
