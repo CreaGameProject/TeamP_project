@@ -74,6 +74,10 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private AudioClip on_groundSE; //音声素材を格納する
+
+    [SerializeField]
+    private AudioClip jumpSE;
+
     [SerializeField]
     private AudioClip damageSE;
 
@@ -253,6 +257,7 @@ public class Player : MonoBehaviour
                 jump_limited = jump_force * jump_distance;  //棒の当たった場所からの距離からジャンプ力を決める
             }
             rb.AddForce(Vector3.up * jump_limited, ForceMode.Impulse);  //プレイヤーの上方向に力を与えてジャンプさせる
+            AS.PlayOneShot(jumpSE);
             freeze_move = false;  //操作の制限を解除する
             yield return null;
         }
