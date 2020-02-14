@@ -15,6 +15,7 @@ public class Boss : MonoBehaviour
     private int repeat = 0;  //繰り返す回数＝＝繰り返した回数かを判定
     int attackType = 0;  //攻撃選択
     bool attackManager = false;
+    private float count, NowTime = 0f; 
 
     private void Start()
     {
@@ -22,43 +23,46 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
-        int attackTimes = Random.Range(0, 3);  //攻撃回数
-        float NowTime = 60.0f - Time.time;
+        int attackTimes = Random.Range(0, 3)+1;  //攻撃回数
+        count += Time.deltaTime;
 
         if (attackManager == false)  //最初と攻撃終了時に攻撃を選択  
         {
             Debug.Log("攻撃を選択中");
-            int attackType = Random.Range(0, 2);
+            attackType = Random.Range(0, 2);
             attackManager = true;
-            Debug.Log("攻撃タイプ" + attackType + attackManager);
+            
+            Debug.Log("攻撃タイプ：" + attackType + "　攻撃回数：" + attackTimes );
+
         }
 
         else if (attackManager == true)
-        {
-            Debug.Log("攻撃タイプ" + attackType + "で" + attackManager + "です。");
-
+        {            
             if (attackType == 0)  //攻撃回数秒待機(仮)
             {
-                if (NowTime % 3  >= attackTimes)
+                if (count >= 1.0f && NowTime < attackTimes)
                 {
-                    Debug.Log("待機中");
+                    NowTime += 1 ;
+                    Debug.Log( NowTime + "秒 待機中");
+                    count = 0.0f;
                     Vector3 pos = this.gameObject.transform.position;
                     this.gameObject.transform.position = new Vector3(pos.x, pos.y, pos.z);
                 }
 
-                else
+                else if (count >= 1.0f && NowTime >= attackTimes)
                 {
                     Debug.Log("待機終了");
                     attackManager = false;
+                    return;
                 }
             }
 
             
-            else if (attackType == 1)  //なぜか入らない部分
+            else if (attackType == 1)
             {                
                 Debug.Log("突進攻撃中");
 
-                if (rushMode == 0) //1->2へ
+                if (rushMode == 0)
                 {
                     Debug.Log("BossMode0");
 
@@ -102,18 +106,19 @@ public class Boss : MonoBehaviour
 
                     transform.Rotate(new Vector3(0, 10, 0));
 
-                    if (transform.localEulerAngles.y >= 170 && repeat == attackTimes)
+                    if (transform.localEulerAngles.y >= 170 && repeat >= attackTimes)
                     {
                         attackManager = false;
-                        rushMode = 0;
                         attackType = 0;
+                        rushMode = 0; 
                         Debug.Log("突進攻撃終了");
                     }
 
-                    else if (transform.localEulerAngles.y >= 170 && repeat != attackTimes)
+                    else if (transform.localEulerAngles.y >= 170 && repeat <= attackTimes)
                     {
                         rushMode = 0;
                         repeat += 1 ;
+                        Debug.Log(repeat + "回目");
                     }
                 }
             }
