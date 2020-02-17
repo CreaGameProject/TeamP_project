@@ -64,7 +64,7 @@ public class Boss : MonoBehaviour
 
                 if (rushMode == 0)
                 {
-                    Debug.Log("BossMode0");
+                    //Debug.Log("BossMode0");
 
                     Vector3 pos = this.gameObject.transform.position;
                     this.gameObject.transform.position = new Vector3(pos.x, pos.y, pos.z - 0.3f);
@@ -106,15 +106,16 @@ public class Boss : MonoBehaviour
 
                     transform.Rotate(new Vector3(0, 10, 0));
 
-                    if (transform.localEulerAngles.y >= 170 && repeat >= attackTimes)
+                    if (transform.localEulerAngles.y >= 170 && repeat == attackTimes)
                     {
                         attackManager = false;
                         attackType = 0;
-                        rushMode = 0; 
+                        rushMode = 0;
+                        repeat = 0;
                         Debug.Log("突進攻撃終了");
                     }
 
-                    else if (transform.localEulerAngles.y >= 170 && repeat <= attackTimes)
+                    else if (transform.localEulerAngles.y >= 170 && repeat < attackTimes)
                     {
                         rushMode = 0;
                         repeat += 1 ;
