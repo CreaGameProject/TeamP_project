@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\displaymanager.cs" />
     <Compile Include="Assets\Scripts\MovingBoProto.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\PlayfootSE.cs" />
     <Compile Include="Assets\Scripts\RetryScript.cs" />
     <Compile Include="Assets\Scripts\ToTitleScript.cs" />
     <Compile Include="Assets\Scripts\UIControler.cs" />

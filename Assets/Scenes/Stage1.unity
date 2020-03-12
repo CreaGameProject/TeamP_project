@@ -66739,6 +66739,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe4855be1ab7614aad497eddbff0f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position1: 220
+  position2: 184
   Bosshp: 5
 --- !u!1 &1805851675 stripped
 GameObject:
@@ -73604,6 +73606,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2062851625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062851623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 215bfa195366f59448a5ae79f5795dcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AS: {fileID: 1590815970}
+  footSE1: {fileID: 8300000, guid: 529fcdfcd7c69a141b707cf3cf15c88b, type: 3}
+  footSE2: {fileID: 8300000, guid: 81e8174d91caea741a193ac7c93fe541, type: 3}
 --- !u!4 &2062851627 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 15f72cd102f76ef41bcdb4b999e8f57c,
