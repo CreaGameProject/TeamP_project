@@ -4,17 +4,12 @@ using System.Collections;
 
 
 public class Boss : MonoBehaviour
-{    
-    [SerializeField]
-    float position1 = 220f;
-
-    [SerializeField]
-    float position2 = 184f;
-
+{ 
     Animator animator;
-    private int count = 0;//繰り返す回数＝＝繰り返した回数かを判定
     public int Bosshp = 5;
-
+    public int attackTimes;
+    public int Count;
+    
     private void Start()
     {
         animator = GetComponent<Animator>();  
@@ -22,10 +17,10 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
-        int attackTimes = Random.Range(0, 3) + 1;  //攻撃回数
-
+        
         if (animator.GetBool("AttackManager") == false)  //最初と攻撃終了時に攻撃を選択  
         {
+            attackTimes = Random.Range(0, 3) + 1;  //攻撃回数
             Debug.Log("攻撃を選択中");
             animator.SetInteger("AttackType", Random.Range(0, 2));
             animator.SetBool("AttackManager", true);
@@ -37,101 +32,48 @@ public class Boss : MonoBehaviour
         {
             if (animator.GetInteger("AttackType") == 0)  //雑魚を投げる攻撃
             {
-                if (count != attackTimes)
+                if (animator.GetInteger("count") != attackTimes)
                 {
-                    Debug.Log("投げ攻撃中");
-                    count += 1;
+                    Count = animator.GetInteger("count") + 1;
+                    Debug.Log("投げ攻撃中" + Count + "回目");
                 }
 
-                else if (count == attackTimes)
+                else if (animator.GetInteger("count") == attackTimes)
                 {
-                    Debug.Log("投げ攻撃終了");
+                    Count = 0;
+                    animator.SetTrigger("ActionEnd");
                     animator.SetBool("AttackManager", false);
-                    count = 0;
+                    animator.SetInteger("count", 0);
+                    Debug.Log("投げ攻撃終了");
                     return;
                 }
             }
 
             else if (animator.GetInteger("AttackType") == 1)
             {
-                if (count != attackTimes)
+                if (animator.GetInteger("count") != attackTimes)
                 {
-                    Debug.Log("突進攻撃中");
-
-                    count += 1;
+                    Count = animator.GetInteger("count") + 1;
+                    Debug.Log("突進攻撃中" + Count + "回目");                    
                 }
 
-                else if (count == attackTimes)
+                else if (animator.GetInteger("count") == attackTimes)
                 {
-                    Debug.Log("突進攻撃終了");
+                    Count = 0;
+                    animator.SetTrigger("ActionEnd");
                     animator.SetBool("AttackManager", false);
-                    count = 0;
+                    animator.SetInteger("count", 0);
+                    Debug.Log("突進攻撃終了");
                     return;
-                }
-                {/* 
-                if (rushMode == 0)
-                {
-                    //Debug.Log("BossMode0");
-
-                    Vector3 pos = this.gameObject.transform.position;
-                    this.gameObject.transform.position = new Vector3(pos.x, pos.y, pos.z - 0.3f);
-
-                    if (pos.z <= position2)
-                    {
-                        rushMode += 1;
-                    }
-                }
-
-                else if (rushMode == 1)
-                {
-                    //Debug.Log("BossMode1");
-
-                    transform.Rotate(new Vector3(0, -10, 0));
-
-                    if (transform.localEulerAngles.y <= 10)
-                    {
-                        rushMode += 1;
-                    }
-                }
-
-                else if (rushMode == 2)
-                {
-                    //Debug.Log("BossMode2");
-
-                    Vector3 pos = this.gameObject.transform.position;
-                    this.gameObject.transform.position = new Vector3(pos.x, pos.y, pos.z + 0.3f);
-
-                    if (pos.z >= position1)
-                    {
-                        rushMode += 1;
-                    }
-                }
-
-                else if (rushMode == 3)
-                {
-                    //Debug.Log("BossMode3");
-
-                    transform.Rotate(new Vector3(0, 10, 0));
-
-                    if (transform.localEulerAngles.y >= 170 && repeat == attackTimes)
-                    {
-                        attackManager = false;
-                        attackType = 0;
-                        rushMode = 0;
-                        repeat = 0;
-                        Debug.Log("突進攻撃終了");
-                    }
-
-                    else if (transform.localEulerAngles.y >= 170 && repeat < attackTimes)
-                    {
-                        rushMode = 0;
-                        repeat += 1 ;
-                        Debug.Log(repeat + "回目");
-                    }
-                }*/
                 }     
             }
         }
+    }
+
+    public void PrintEvent()
+    {
+        animator.SetInteger("count", animator.GetInteger("count") + 1);
+        //Debug.Log(animator.GetInteger("count") + "回目");
     }
 
     public void OnCollisionEnter(Collision other) //ボスのHP処理→ゲームクリアシーン読み込み

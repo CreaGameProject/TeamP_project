@@ -66727,21 +66727,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1803970883}
   m_PrefabAsset: {fileID: 0}
---- !u!111 &1803970885
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1803970884}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!136 &1803970886
 CapsuleCollider:
   m_ObjectHideFlags: 0
