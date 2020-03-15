@@ -66512,7 +66512,7 @@ PrefabInstance:
     - target: {fileID: -6057140222963153312, guid: 135ef1043826e714f90f3613866cb4f8,
         type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: 135ef1043826e714f90f3613866cb4f8,
         type: 3}
@@ -66523,6 +66523,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CullingMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 135ef1043826e714f90f3613866cb4f8,
+        type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -5917696088941114888, guid: 135ef1043826e714f90f3613866cb4f8,
         type: 3}
@@ -66779,6 +66784,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe4855be1ab7614aad497eddbff0f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position1: 220
+  position2: 184
   Bosshp: 5
 --- !u!1 &1805851675 stripped
 GameObject:

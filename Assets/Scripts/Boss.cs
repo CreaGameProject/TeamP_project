@@ -5,18 +5,14 @@ using System.Collections;
 
 public class Boss : MonoBehaviour
 {    
-    /*[SerializeField]
+    [SerializeField]
     float position1 = 220f;
 
     [SerializeField]
-    float position2 = 184f;*/
-    
-    int AttackType;         //！Animatorで宣言した
-    bool AttackManager;     //！   パラメーターに変えたい
+    float position2 = 184f;
+
     Animator animator;
-
     private int count = 0;//繰り返す回数＝＝繰り返した回数かを判定
-
     public int Bosshp = 5;
 
     private void Start()
@@ -26,41 +22,37 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
-        animator.SetInteger("AttackType", 0);     //！ここで
-        animator.SetBool("AttackManager", false); //！   いいのか
-
         int attackTimes = Random.Range(0, 3) + 1;  //攻撃回数
 
-        if (AttackManager == false)  //最初と攻撃終了時に攻撃を選択  
+        if (animator.GetBool("AttackManager") == false)  //最初と攻撃終了時に攻撃を選択  
         {
             Debug.Log("攻撃を選択中");
-            AttackType = Random.Range(0, 2);
-            AttackManager = true;
+            animator.SetInteger("AttackType", Random.Range(0, 2));
+            animator.SetBool("AttackManager", true);
 
-            Debug.Log("攻撃タイプ：" + AttackType + "　攻撃回数：" + attackTimes);
+            Debug.Log("攻撃タイプ：" + animator.GetInteger("AttackType") + "　攻撃回数：" + attackTimes);
         }
 
-        else if (AttackManager == true)
+        else if (animator.GetBool("AttackManager") == true)
         {
-            if (AttackType == 0)  //雑魚を投げる攻撃
+            if (animator.GetInteger("AttackType") == 0)  //雑魚を投げる攻撃
             {
                 if (count != attackTimes)
                 {
                     Debug.Log("投げ攻撃中");
-
                     count += 1;
                 }
 
                 else if (count == attackTimes)
                 {
                     Debug.Log("投げ攻撃終了");
-                    AttackManager = false;
+                    animator.SetBool("AttackManager", false);
                     count = 0;
                     return;
                 }
             }
 
-            else if (AttackType == 1)
+            else if (animator.GetInteger("AttackType") == 1)
             {
                 if (count != attackTimes)
                 {
@@ -72,7 +64,7 @@ public class Boss : MonoBehaviour
                 else if (count == attackTimes)
                 {
                     Debug.Log("突進攻撃終了");
-                    AttackManager = false;
+                    animator.SetBool("AttackManager", false);
                     count = 0;
                     return;
                 }
