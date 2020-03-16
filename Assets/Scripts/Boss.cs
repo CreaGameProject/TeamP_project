@@ -9,7 +9,16 @@ public class Boss : MonoBehaviour
     public int Bosshp = 5;
     public int attackTimes;
     public int Count;
-    
+
+    public GameObject enemy_prefab;
+
+    public Transform LowerArm_R_end;
+
+    public bool BossZako = false; //ボスが生成した雑魚であることを区別
+
+    public GameObject zako_prefab;
+    public GameObject zako_go;
+
     private void Start()
     {
         animator = GetComponent<Animator>();  
@@ -70,10 +79,20 @@ public class Boss : MonoBehaviour
         }
     }
 
-    public void PrintEvent()
+    public void ActionCount()
     {
         animator.SetInteger("count", animator.GetInteger("count") + 1);
         //Debug.Log(animator.GetInteger("count") + "回目");
+    }
+
+    public void CallBossZako()
+    {        
+        zako_go = Instantiate(enemy_prefab, LowerArm_R_end.transform.position, LowerArm_R_end.transform.rotation);
+        Zako1 zako1_sc;
+        zako1_sc = zako_go.GetComponent<Zako1>();
+        zako1_sc.is_boss= true;
+        BossZako = true;
+
     }
 
     public void OnCollisionEnter(Collision other) //ボスのHP処理→ゲームクリアシーン読み込み

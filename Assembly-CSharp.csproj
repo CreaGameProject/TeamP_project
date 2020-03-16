@@ -77,7 +77,6 @@
     <Compile Include="Assets\Scripts\ToTitleScript.cs" />
     <Compile Include="Assets\Scripts\UIControler.cs" />
     <Compile Include="Assets\Scripts\Zako1.cs" />
-    <Compile Include="Assets\Scripts\Zako2.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/maina taguchi/Desktop/TeamP_project/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

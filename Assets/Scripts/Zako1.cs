@@ -22,6 +22,8 @@ public class Zako1 : MonoBehaviour
 
     public bool is_attacked = false;
 
+    public bool is_boss = false;
+
     private float offset;
 
     public GameObject hit_particle;
@@ -39,15 +41,20 @@ public class Zako1 : MonoBehaviour
         offset = Random.Range(0.0f, 10.0f);
         t += offset;
         player_go = GameObject.FindGameObjectWithTag("Player");
+
+        if (is_boss)
+        {
+            transform.LookAt(player_go.transform.position);
+        }
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (chase_player && is_active)
+        if (is_boss && is_active)
         {
-            transform.LookAt(player_go.transform.position);
-            rb.transform.position += (transform.forward * Time.deltaTime * 2.0f) + ((transform.up * Mathf.Sin(t)) * Time.deltaTime);
+            rb.transform.position += (transform.forward * Time.deltaTime * 20.0f);
         }
 
         if (rend.isVisible && is_active)

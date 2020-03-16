@@ -66769,9 +66769,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe4855be1ab7614aad497eddbff0f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position1: 220
-  position2: 184
   Bosshp: 5
+  attackTimes: 0
+  Count: 0
+  enemy_prefab: {fileID: 4449905084632411731, guid: 1b26e82087f5f184e83e8746ffa42b78,
+    type: 3}
+  LowerArm_R_end: {fileID: 1848503754}
+  BossZako: 0
+  zako_prefab: {fileID: 0}
+  zako_go: {fileID: 0}
 --- !u!1 &1805851675 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: eaf0bebf885c66445b707607102f9829,
@@ -68949,6 +68955,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 308385dc8c9e9e34db6b2bf6f9e7e045, type: 3}
+--- !u!4 &1848503754 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1533959888306852334, guid: 135ef1043826e714f90f3613866cb4f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1803970883}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1857456106
 PrefabInstance:
   m_ObjectHideFlags: 0
