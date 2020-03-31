@@ -16,6 +16,8 @@ public class Boss : MonoBehaviour
 
     public bool BossZako = false; //ボスが生成した雑魚であることを区別
 
+    public bool is_attacked = false;//雑魚が棒に当たったかをZakoから取得する
+
     public GameObject zako_prefab;
     public GameObject zako_go;
 
@@ -25,8 +27,7 @@ public class Boss : MonoBehaviour
     }
 
     void Update()
-    {
-        
+    {        
         if (animator.GetBool("AttackManager") == false)  //最初と攻撃終了時に攻撃を選択  
         {
             attackTimes = Random.Range(0, 3) + 1;  //攻撃回数
@@ -86,7 +87,8 @@ public class Boss : MonoBehaviour
     }
 
     public void CallBossZako()
-    {        
+    {   //ボスが投げる雑魚のイベントスクリプト
+
         zako_go = Instantiate(enemy_prefab, LowerArm_R_end.transform.position, LowerArm_R_end.transform.rotation);
         Zako1 zako1_sc;
         zako1_sc = zako_go.GetComponent<Zako1>();

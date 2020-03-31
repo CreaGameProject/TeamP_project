@@ -75,25 +75,37 @@ public class Zako1 : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
-        if (collision.transform.tag == "Bo-")
+        if (is_attacked == false)
         {
-            //Debug.Log("Hit!!");
-            //rb.isKinematic = false;
-            is_active = false;
-            is_attacked = true;
-            GameObject particle = Instantiate(hit_particle, collision.GetContact(0).point, Quaternion.LookRotation( collision.GetContact(0).normal));
-            Destroy(particle, 0.9f);
+            if (collision.transform.tag == "Bo-")
+            {
+                //Debug.Log("Hit!!");
+                //rb.isKinematic = false;
+                is_active = false;
+                is_attacked = true;
+                GameObject particle = Instantiate(hit_particle, collision.GetContact(0).point, Quaternion.LookRotation(collision.GetContact(0).normal));
+                Destroy(particle, 0.9f);
+            }
+
         }
 
-        if (collision.transform.tag == "Enemy")
+        if (is_attacked == true)
         {
-            if (collision.transform.GetComponent<Zako1>())
+            if (collision.transform.tag == "Enemy")
             {
-                if (collision.transform.GetComponent<Zako1>().is_attacked)
+                if (collision.transform.GetComponent<Zako1>())
                 {
-                    is_active = false;
-                    is_attacked = true;
+                    if (collision.transform.GetComponent<Zako1>().is_attacked)
+                    {
+                        is_active = false;
+                        is_attacked = true;
+                    }
+                }
+
+                else if (collision.transform.GetComponent<Boss>())
+                {
+                    //ボスのHPを1減らしたい　関数を作って呼び出す？
+                    Destroy(this.gameObject, 3.0f); //プレハブクローンをデストロイしたいけど出来てるのか？
                 }
             }
         }
